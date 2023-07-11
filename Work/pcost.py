@@ -48,13 +48,22 @@ def portfolio_cost_csv(filename):
     fp.close()
     return total_cost
 
+# exer 3.14
+from report import read_portfolio
+def portfolio_cost(filename):
+    portfolio = read_portfolio(filename)
+    #return sum([row['shares'] * row['price'] for row in portfolio])
+    #return sum([stock.shares * stock.price for stock in portfolio])
+    return portfolio.total_cost
+
 # exer 1.33
-import sys
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    filename = 'Data/portfolio.csv'
-cost = portfolio_cost(filename)
-print('Total cost:', cost)
-cost = portfolio_cost_csv(filename)
-print('Total cost:', cost)
+def main(args):
+    print('Total cost: ', portfolio_cost(args))
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) == 2:
+        filename = sys.argv[1]
+    else:
+        filename = 'Data/portfolio.csv'
+    main(filename)
